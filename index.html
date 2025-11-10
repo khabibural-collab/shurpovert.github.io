@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виртуальный конструктор 12×19</title>
+    <style>
+        :root {
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --font-family-base: "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  --font-size-base: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --radius-base: 8px;
+  --radius-lg: 12px;
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-base);
+    background: linear-gradient(135deg, #FFE66D 0%, #95E1D3 100%);
+    min-height: 100vh;
+    padding: var(--space-20);
+    color: var(--color-text);
+}
+
+.left-panel h2 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-12);
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-20);
+}
+
+.app-header {
+    text-align: center;
+    background: white;
+    padding: var(--space-24);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.app-header h1 {
+    font-size: 2.5em;
+    color: #FF6B6B;
+    margin-bottom: var(--space-8);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.app-header p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-lg);
+}
+
+.main-content {
+    display: flex;
+    gap: var(--space-20);
+    align-items: flex-start;
+}
+
+@media (max-width: 1200px) {
+    .main-content {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .left-panel,
+    .right-panel {
+        width: 100%;
+    }
+    
+    .right-panel {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .action-btn {
+        flex: 1 1 calc(50% - 6px);
+        min-width: 150px;
+    }
+}
+
+.left-panel {
+    width: 280px;
+    background: white;
+    padding: var(--space-20);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.left-panel h2 {
+    color: #FF6B6B;
+    margin-bottom: var(--space-16);
+    font-size: var(--font-size-xl);
+}
+
+
+
+.info-text {
+    background: #FFE66D;
+    padding: var(--space-12);
+    border-radius: var(--radius-base);
+    margin: var(--space-16) 0;
+    font-size: 14px;
+    text-align: left;
+    font-weight: var(--font-weight-medium);
+    color: #333;
+}
+
+.color-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-8);
+    margin-bottom: var(--space-16);
+}
+
+.color-btn {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 2px solid #ccc;
+    border-radius: var(--radius-base);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.color-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.part-buttons,
+.tool-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.part-btn,
+.tool-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    padding: var(--space-12);
+    background: white;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-base);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+}
+
+.part-btn:hover,
+.tool-btn:hover {
+    background: var(--color-secondary);
+    transform: translateX(4px);
+}
+
+.part-btn.active,
+.tool-btn.active {
+    background: #4ECDC4;
+    border-color: #4ECDC4;
+    color: white;
+    transform: translateX(4px);
+}
+
+.part-icon {
+    flex-shrink: 0;
+}
+
+
+
+.canvas-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    padding: 0;
+}
+
+.canvas-wrapper {
+    background: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 30px;
+    width: 760px;
+    height: 520px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+
+#mainCanvas {
+    cursor: pointer;
+    display: block;
+}
+
+.right-panel {
+    width: 200px;
+    background: white;
+    padding: var(--space-20);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+}
+
+.action-btn {
+    width: 100%;
+    padding: var(--space-12);
+    border: none;
+    border-radius: var(--radius-base);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.action-btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-clear {
+    background: #FF6B6B;
+}
+
+.btn-clear:hover {
+    background: #FF5252;
+}
+
+.btn-save {
+    background: #4ECDC4;
+}
+
+.btn-save:hover {
+    background: #45B7AF;
+}
+
+.btn-print {
+    background: #95E1D3;
+    color: #333;
+}
+
+.btn-print:hover {
+    background: #7DD6C8;
+}
+
+.btn-share {
+    background: #FFE66D;
+    color: #333;
+}
+
+.btn-share:hover {
+    background: #FFD84D;
+}
+
+.btn-undo {
+    background: #A78BFA;
+}
+
+.btn-undo:hover {
+    background: #9370F0;
+}
+
+.bottom-info {
+    background: white;
+    padding: var(--space-20);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stats {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+}
+
+
+
+.version {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: var(--space-24);
+    border-radius: var(--radius-lg);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-content h3 {
+    margin-bottom: var(--space-16);
+    color: var(--color-text);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: var(--space-12);
+    margin-top: var(--space-16);
+}
+
+.modal-btn {
+    flex: 1;
+    padding: var(--space-12);
+    border: none;
+    border-radius: var(--radius-base);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-btn-confirm {
+    background: #FF6B6B;
+    color: white;
+}
+
+.modal-btn-cancel {
+    background: var(--color-secondary);
+    color: var(--color-text);
+}
+
+#qrCodeContainer {
+    margin: var(--space-16) 0;
+    display: flex;
+    justify-content: center;
+}
+
+.share-url {
+    margin-top: var(--space-12);
+    padding: var(--space-8);
+    background: var(--color-secondary);
+    border-radius: var(--radius-base);
+    word-break: break-all;
+    font-size: 12px;
+}
+
+.angle-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-8);
+    margin: var(--space-16) 0;
+}
+
+.angle-btn {
+    padding: var(--space-16);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-base);
+    background: white;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.angle-btn:hover {
+    background: var(--color-secondary);
+    transform: scale(1.05);
+}
+
+.preset-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-12);
+    margin: var(--space-16) 0;
+}
+
+.preset-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-20);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-base);
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: var(--font-weight-semibold);
+}
+
+.preset-btn:hover {
+    background: var(--color-secondary);
+    transform: scale(1.05);
+}
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <h1>🔩 Виртуальный конструктор шуруповёрта 🔧</h1>
+            <p>Создавай яркие узоры с деталями и шурупами!</p>
+        </div>
+
+        <div class="main-content">
+            <div class="left-panel">
+                <h2>Выбери цвет</h2>
+                <div class="color-buttons">
+                    <button class="color-btn" data-color="#4ECDC4" style="background: #4ECDC4;" title="Синий"></button>
+                    <button class="color-btn" data-color="#FF6B6B" style="background: #FF6B6B;" title="Красный"></button>
+                    <button class="color-btn" data-color="#2ECC71" style="background: #2ECC71;" title="Зелёный"></button>
+                    <button class="color-btn" data-color="#FFE66D" style="background: #FFE66D;" title="Жёлтый"></button>
+                </div>
+
+                <h2 style="margin-top: var(--space-20);">Выбери деталь</h2>
+                <div class="part-buttons">
+                    <button class="part-btn" data-part="circle">
+                        <canvas class="part-icon" width="60" height="60" data-preview="circle"></canvas>
+                        <span>Круг</span>
+                    </button>
+                    <button class="part-btn" data-part="triangle">
+                        <canvas class="part-icon" width="60" height="60" data-preview="triangle"></canvas>
+                        <span>Треугольник</span>
+                    </button>
+                    <button class="part-btn" data-part="square">
+                        <canvas class="part-icon" width="60" height="60" data-preview="square"></canvas>
+                        <span>Квадрат</span>
+                    </button>
+                    <button class="part-btn" data-part="strip">
+                        <canvas class="part-icon" width="60" height="60" data-preview="strip"></canvas>
+                        <span>Полоска</span>
+                    </button>
+                </div>
+
+                <h2 style="margin-top: var(--space-20);">Инструменты</h2>
+                <div class="tool-buttons">
+                    <button class="tool-btn" data-tool="screw">
+                        <span style="font-size: 24px;">🔩</span>
+                        <span>Шуруп</span>
+                    </button>
+                    <button class="tool-btn" data-tool="delete">
+                        <span style="font-size: 24px;">🗑️</span>
+                        <span>Стирание</span>
+                    </button>
+                </div>
+
+                <h2 style="margin-top: var(--space-20);">Трафареты</h2>
+                <div class="tool-buttons">
+                    <button class="tool-btn" id="drawTemplateBtn">
+                        <span style="font-size: 24px;">✏️</span>
+                        <span>Рисовать</span>
+                    </button>
+                    <button class="tool-btn" id="aiTemplateBtn">
+                        <span style="font-size: 24px;">🤖</span>
+                        <span>AI генератор</span>
+                    </button>
+                    <button class="tool-btn" id="presetsBtn">
+                        <span style="font-size: 24px;">📐</span>
+                        <span>Шаблоны</span>
+                    </button>
+                </div>
+
+                <div class="info-text" style="margin-top: var(--space-20);">
+                    <div>Деталей на доске: <strong><span id="partsCount">0</span></strong></div>
+                    <div style="margin-top: 4px;">Шурупов на доске: <strong><span id="screwsCount">0</span></strong></div>
+                </div>
+                <div class="info-text" style="margin-top: var(--space-12); background: #95E1D3; font-size: 12px;">
+                    <div style="font-weight: bold; margin-bottom: 4px;">ℹ️ Подсказка:</div>
+                    <div>▶️ Угол детали — при размещении</div>
+                    <div>▶️ Угол трафарета — кнопка справа</div>
+                </div>
+            </div>
+
+            <div class="canvas-container">
+                <div class="canvas-wrapper">
+                    <canvas id="mainCanvas" width="700" height="450"></canvas>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <button class="action-btn btn-clear" id="clearBtn">🗑️ Очистить доску</button>
+                <button class="action-btn btn-save" id="saveBtn">💾 Сохранить картинку</button>
+                <button class="action-btn btn-print" id="printBtn">🖨️ Печать</button>
+                <button class="action-btn btn-share" id="shareBtn">📤 Поделиться</button>
+                <button class="action-btn btn-undo" id="undoBtn">↩️ Отмена</button>
+                <button class="action-btn" id="rotateTemplateBtn" style="background: #F39C12;" title="Поворачивает всю сетку трафарета на 90°, не влияет на углы деталей">🔄 Повернуть трафарет</button>
+                <button class="action-btn" id="loadBtn" style="background: #9B59B6; color: white;">🖼️ Загрузить изображение</button>
+            </div>
+        </div>
+
+        <div class="bottom-info">
+            <div class="stats">
+                Режим: <strong><span id="currentMode">Выберите инструмент</span></strong>
+            </div>
+            <div class="stats">
+                Подсказка: <span id="hintText">Выбери инструмент и кликай на доску</span>
+            </div>
+            <div class="stats">
+                <span id="rotationInfo">Трафарет: 0°</span>
+            </div>
+            <div class="version">v3.0 - Конструктор с деталями</div>
+        </div>
+    </div>
+
+    <div class="modal" id="clearModal">
+        <div class="modal-content">
+            <h3>Очистить всю доску?</h3>
+            <p>Все болты будут удалены. Это действие нельзя отменить.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-confirm" id="confirmClear">Да, очистить</button>
+                <button class="modal-btn modal-btn-cancel" id="cancelClear">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="shareModal">
+        <div class="modal-content">
+            <h3>Поделиться проектом</h3>
+            <div id="qrCodeContainer"></div>
+            <div class="share-url" id="shareUrl"></div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-confirm" id="copyUrlBtn">Копировать ссылку</button>
+                <button class="modal-btn modal-btn-cancel" id="closeShareModal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="angleModal">
+        <div class="modal-content">
+            <h3 id="angleModalTitle">Выберите угол поворота</h3>
+            <p style="margin-bottom: var(--space-16); color: var(--color-text-secondary); font-size: var(--font-size-sm);">Поворачивается только выбранная деталь, трафарет не изменяется</p>
+            <div class="angle-buttons">
+                <button class="angle-btn" data-angle="0">0°</button>
+                <button class="angle-btn" data-angle="45">45°</button>
+                <button class="angle-btn" data-angle="90">90°</button>
+                <button class="angle-btn" data-angle="135">135°</button>
+                <button class="angle-btn" data-angle="180">180°</button>
+                <button class="angle-btn" data-angle="225">225°</button>
+                <button class="angle-btn" data-angle="270">270°</button>
+                <button class="angle-btn" data-angle="315">315°</button>
+            </div>
+            <button class="modal-btn modal-btn-cancel" id="cancelAngleModal" style="margin-top: var(--space-16);">Отмена</button>
+        </div>
+    </div>
+
+    <div class="modal" id="drawTemplateModal">
+        <div class="modal-content" style="max-width: 600px; max-height: 90vh; overflow-y: auto; position: relative;">
+            <button id="closeDrawModalX" style="position: absolute; top: 12px; right: 12px; background: transparent; border: none; font-size: 24px; cursor: pointer; color: var(--color-text); line-height: 1; padding: 4px 8px;" title="Закрыть">✕</button>
+            <h3>Нарисуйте трафарет</h3>
+            <div style="margin: var(--space-16) 0;">
+                <canvas id="drawCanvas" width="400" height="400" style="border: 2px solid var(--color-border); border-radius: var(--radius-base); cursor: crosshair; background: white; display: block; max-width: 100%;"></canvas>
+            </div>
+            <div style="display: flex; gap: var(--space-8); margin-bottom: var(--space-16); flex-wrap: wrap;">
+                <button class="modal-btn" id="brushBtn" style="background: var(--color-primary); color: white; flex: 1;">🖌️ Кисть</button>
+                <button class="modal-btn" id="eraserBtn" style="background: var(--color-secondary); flex: 1;">🧹 Ластик</button>
+                <input type="color" id="drawColorPicker" value="#000000" style="width: 60px; height: 40px; border: none; border-radius: var(--radius-base); cursor: pointer;">
+                <input type="range" id="brushSize" min="1" max="20" value="5" style="flex: 1; min-width: 100px;">
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-confirm" id="saveDrawTemplate">Сохранить</button>
+                <button class="modal-btn" id="clearDrawCanvas" style="background: var(--color-warning); color: white;">Очистить</button>
+                <button class="modal-btn modal-btn-cancel" id="closeDrawModal">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="aiTemplateModal">
+        <div class="modal-content">
+            <h3>AI генератор трафаретов</h3>
+            <p style="margin-bottom: var(--space-16); color: var(--color-text-secondary);">Опишите, какой узор вы хотите создать</p>
+            <textarea id="aiPrompt" placeholder="Например: диагональные полосы, цветок, звёзды, геометрический узор..." style="width: 100%; min-height: 100px; padding: var(--space-12); border: 1px solid var(--color-border); border-radius: var(--radius-base); font-family: var(--font-family-base); resize: vertical;"></textarea>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-confirm" id="generateAITemplate">🤖 Генерировать</button>
+                <button class="modal-btn modal-btn-cancel" id="closeAIModal">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="presetsModal">
+        <div class="modal-content">
+            <h3>Выберите шаблон</h3>
+            <div class="preset-buttons">
+                <button class="preset-btn" data-preset="grid">
+                    <span style="font-size: 48px;">⊞</span>
+                    <span>Сетка</span>
+                </button>
+                <button class="preset-btn" data-preset="diagonal">
+                    <span style="font-size: 48px;">⧄</span>
+                    <span>Диагональ</span>
+                </button>
+                <button class="preset-btn" data-preset="stars">
+                    <span style="font-size: 48px;">✦</span>
+                    <span>Звёзды</span>
+                </button>
+                <button class="preset-btn" data-preset="flower">
+                    <span style="font-size: 48px;">✿</span>
+                    <span>Цветок</span>
+                </button>
+            </div>
+            <button class="modal-btn modal-btn-cancel" id="closePresetsModal" style="margin-top: var(--space-16); width: 100%;">Отмена</button>
+        </div>
+    </div>
+
+    <div class="modal" id="imageEditorModal">
+        <div class="modal-content" style="max-width: 700px; width: 90%; max-height: 90vh; overflow-y: auto; position: relative;">
+            <button id="closeImageEditorX" style="position: absolute; top: 12px; right: 12px; background: transparent; border: none; font-size: 24px; cursor: pointer; color: var(--color-text); line-height: 1; padding: 4px 8px; z-index: 10;" title="Закрыть">✕</button>
+            <h3 style="margin-bottom: var(--space-16);">Редактирование трафарета</h3>
+            
+            <div style="display: flex; gap: var(--space-20); margin-bottom: var(--space-20); flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <div style="background: white; border: 2px solid var(--color-border); border-radius: var(--radius-base); padding: var(--space-16); margin-bottom: var(--space-16); position: relative; overflow: hidden; min-height: 400px; display: flex; align-items: center; justify-content: center;">
+                        <canvas id="imageEditorPreview" width="360" height="570" style="max-width: 100%; height: auto; display: block;"></canvas>
+                    </div>
+                </div>
+                
+                <div style="flex: 0 0 240px; min-width: 200px;">
+                    <div style="margin-bottom: var(--space-20);">
+                        <label style="display: block; font-weight: var(--font-weight-semibold); margin-bottom: var(--space-8); font-size: var(--font-size-base);">Масштаб: <span id="scaleValue">100</span>%</label>
+                        <input type="range" id="scaleSlider" min="50" max="200" value="100" style="width: 100%; cursor: pointer;">
+                        <div style="display: flex; gap: var(--space-8); margin-top: var(--space-8);">
+                            <button class="modal-btn" id="scaleDownBtn" style="flex: 1; background: var(--color-secondary); padding: var(--space-8);">−</button>
+                            <button class="modal-btn" id="scaleUpBtn" style="flex: 1; background: var(--color-secondary); padding: var(--space-8);">+</button>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: var(--space-20);">
+                        <label style="display: block; font-weight: var(--font-weight-semibold); margin-bottom: var(--space-8); font-size: var(--font-size-base);">Ориентация: <span id="rotationValue">0</span>°</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8);">
+                            <button class="modal-btn" id="rotate0Btn" style="background: var(--color-primary); color: white;">0°</button>
+                            <button class="modal-btn" id="rotate90Btn" style="background: var(--color-secondary);">90°</button>
+                            <button class="modal-btn" id="rotate180Btn" style="background: var(--color-secondary);">180°</button>
+                            <button class="modal-btn" id="rotate270Btn" style="background: var(--color-secondary);">270°</button>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: var(--space-20);">
+                        <label style="display: block; font-weight: var(--font-weight-semibold); margin-bottom: var(--space-8); font-size: var(--font-size-base);">Смещение X: <span id="offsetXValue">0</span>%</label>
+                        <input type="range" id="offsetXSlider" min="-50" max="50" value="0" style="width: 100%; cursor: pointer;">
+                    </div>
+                    
+                    <div style="margin-bottom: var(--space-20);">
+                        <label style="display: block; font-weight: var(--font-weight-semibold); margin-bottom: var(--space-8); font-size: var(--font-size-base);">Смещение Y: <span id="offsetYValue">0</span>%</label>
+                        <input type="range" id="offsetYSlider" min="-50" max="50" value="0" style="width: 100%; cursor: pointer;">
+                    </div>
+                    
+                    <div style="display: flex; gap: var(--space-8); margin-bottom: var(--space-12);">
+                        <button class="modal-btn" id="centerImageBtn" style="flex: 1; background: var(--color-info); color: white;">По центру</button>
+                        <button class="modal-btn" id="resetImageBtn" style="flex: 1; background: var(--color-warning); color: white;">Сброс</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-confirm" id="applyImageBtn">Применить</button>
+                <button class="modal-btn modal-btn-cancel" id="cancelImageBtn">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
